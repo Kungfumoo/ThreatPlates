@@ -93,7 +93,13 @@ function IsQuestUnit(unit, create_watcher)
         quest_area = true
         quest_title = text
       else
-        local unit_name, progress = string.match(text, "^ ([^ ]-) ?%- (.+)$")
+        local unit_name, progress = string.match(text, "^([^ ]-) ?%- (.+)$")
+
+        if not unit_name then
+          unit_name = "" --pretend it's the player
+          progress = text
+        end
+
         local area_progress = string.match(text, "(%d+)%%$")
 
         if progress or area_progress then
